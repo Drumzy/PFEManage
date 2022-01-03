@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+{% block title%} Liste des Articles{% endblock %}
+{% block body %}
+
+{% if sujets %}
+ <table id="sujets" class="table table-striped">
+ <thead>
+ <tr>
+ <th>Titre</th>
+ <th>Description</th>
+ <th>Nombre des Points</th>
+ <th>Candidats</th>
+ </tr>
+ </thead>
+ <tbody>
+ {% for sujet in sujets %}
+ <tr>
+ <td>{{ sujet.titre }}</td>
+ <td>{{ sujet.description }}</td>
+ <td>{{sujet.nbpoints}}</td>
+
+ <td>
+<a href="/sujet/{{ sujet.id }}" class="btn btn-dark">Détails</a>
+<a href="/sujet/edit/{{ sujet.id }}" class="btn btn-dark">Modifier</a>
+<a href="/sujet/delete/{{ sujet.id }}" class="btn btn-danger"
+onclick="return confirm('Etesvous sûr de supprimer cet article?');">Supprimer</a>
+</td>
+ </tr>
+ {% endfor %}
+ </tbody>
+ </table>
+ {% else %}
+ <p>Aucun Sujet</p>
+ {% endif %}
+{% endblock %}
